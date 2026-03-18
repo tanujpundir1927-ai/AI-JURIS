@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI-Juris System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>AI-Juris</h1>
+        <p>AI Powered Judicial Assistant</p>
+
+        <textarea id="caseInput" placeholder="Enter case description..."></textarea>
+
+        <button onclick="processCase()">Analyze Case</button>
+
+        <div id="output"></div>
+    </div>
+
+    <script>
+        function processCase() {
+            let text = document.getElementById("caseInput").value;
+
+            let summary = text.length > 50 ? text.substring(0,50) + "..." : text;
+
+            let section = "General Section";
+            if (text.includes("theft")) section = "IPC 379";
+            else if (text.includes("murder")) section = "IPC 302";
+            else if (text.includes("fraud")) section = "IPC 420";
+
+            let decision = "Needs Review";
+            if (text.includes("minor")) decision = "Bail Granted";
+            else if (text.includes("serious")) decision = "Bail Rejected";
+
+            document.getElementById("output").innerHTML =
+                "<h3>Result:</h3>" +
+                "<p><b>Summary:</b> " + summary + "</p>" +
+                "<p><b>Section:</b> " + section + "</p>" +
+                "<p><b>Decision:</b> " + decision + "</p>";
+        }
+    </script>
+
+</body>
+</html>
